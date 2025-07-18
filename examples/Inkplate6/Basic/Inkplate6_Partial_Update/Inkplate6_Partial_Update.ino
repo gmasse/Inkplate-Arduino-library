@@ -29,8 +29,7 @@ const char text[] = "This is partial update on Inkplate 6 e-paper display! :)";
 // This variable is used for moving the text (scrolling)
 int offset = 800;
 
-// Variable that keeps count on how much screen has been partially updated
-int n = 0;
+int partialUpdates=9;
 void setup()
 {
     display.begin();                    // Init Inkplate library (you should call this function ONLY ONCE)
@@ -39,6 +38,7 @@ void setup()
     display.setTextColor(BLACK, WHITE); // Set text color to be black and background color to be white
     display.setTextSize(4);             // Set text to be 4 times bigger than classic 5x7 px text
     display.setTextWrap(false);         // Disable text wraping
+    display.setFullUpdateThreshold(partialUpdates); //Set the number of partial updates before doing a full update
 }
 
 void loop()
@@ -48,16 +48,7 @@ void loop()
     display.clearDisplay();         // Clear content in frame buffer
     display.setCursor(offset, 300); // Set new position for text
     display.print(text);            // Write text at new position
-    if (n > 9)
-    {                      // Check if you need to do full refresh or you can do partial update
-        display.display(); // Do a full refresh
-        n = 0;
-    }
-    else
-    {
-        display.partialUpdate(false, true); // Do partial update
-        n++;                                // Keep track on how many times screen has been partially updated
-    }
+    display.partialUpdate(false, true); // Do partial update
     offset -= 20; // Move text into new position
     if (offset < 0)
         offset = 800; // Text is scrolled till the end of the screen? Get it back on the start!
@@ -68,19 +59,8 @@ void loop()
     display.clearDisplay();         // Clear content in frame buffer
     display.setCursor(offset, 300); // Set new position for text
     display.print(text);            // Write text at new position
-
     display.einkOn(); // Turn on e-ink display
-    if (n > 9)        // Check if you need to do full refresh or you can do partial update
-    {
-        display.einkOff(); // Turn off e-ink display after partial updates
-        display.display(); // Do a full refresh
-        n = 0;
-    }
-    else
-    {
-        display.partialUpdate(false, true); // Do partial update
-        n++;                                // Keep track on how many times screen has been partially updated
-    }
+    display.partialUpdate(false, true); // Do partial update
     offset -= 20; // Move text into new position
     if (offset < 0)
         offset = 800; // Text is scrolled till the end of the screen? Get it back on the start!
