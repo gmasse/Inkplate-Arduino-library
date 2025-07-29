@@ -1,8 +1,8 @@
 /*
-  Inkplate10_Set_VCOM sketch for Soldered Inkplate 10.
-  For this sketch you will need USB and Inkplate 10.
+  Inkplate6FLICK_Set_VCOM sketch for Soldered Inkplate 10.
+  For this sketch you will need USB and Inkplate 6FLICK.
   Select "e-radionica Inkplate 10" or "Soldered Inkplate10" from Tools -> Board menu.
-  Don't have "e-radionica Inkplate10" or "Soldered Inkplate10" option? Follow our tutorial and add it:
+  Don't have "Soldered Inkplate6FLICK" option? Follow our tutorial and add it:
   https://soldered.com/learn/add-inkplate-6-board-definition-to-arduino-ide/
 
   This sketch is intended to help calibrate the VCOM display voltage.
@@ -15,9 +15,8 @@
 */
 
 // Next 3 lines are a precaution, you can ignore those, and the example would also work without them
-#if !defined(ARDUINO_INKPLATE10) && !defined(ARDUINO_INKPLATE10V2)
-#error                                                                                                                 \
-    "Wrong board selection for this example, please select e-radionica Inkplate10 or Soldered Inkplate10 in the boards menu."
+#ifndef ARDUINO_INKPLATE6FLICK
+#error "Wrong board selection for this example, please select Soldered Inkplate 6 FLICK"
 #endif
 
 #include <EEPROM.h>
