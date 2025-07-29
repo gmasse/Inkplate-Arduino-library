@@ -66,8 +66,8 @@ void loop()
 */
 
 // Next 3 lines are a precaution, you can ignore those, and the example would also work without them
-#ifndef ARDUINO_INKPLATE4TEMPERA
-#error "Wrong board selection for this example, please select Inkplate 4 TEMPERA in the boards menu."
+#if !defined(ARDUINO_INKPLATE6PLUS) && !defined(ARDUINO_INKPLATE6PLUSV2)
+#error "Wrong board selection for this example, please select e-radionica Inkplate 6Plus or Soldered Inkplate 6Plus in the boards menu."
 #endif
 
 #include "Inkplate.h"            //Include Inkplate library to the sketch
