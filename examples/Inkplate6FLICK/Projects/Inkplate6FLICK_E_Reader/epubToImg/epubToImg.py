@@ -8,6 +8,12 @@ from io import BytesIO
 from PIL import Image
 from playwright.sync_api import sync_playwright
 
+# ==== Configurable defaults ====
+DEFAULT_WIDTH = 758
+DEFAULT_HEIGHT = 930
+DEFAULT_TEXT_SIZE = "16px"
+# ===============================
+
 class EPUBSmartSplitter:
     def __init__(self, epub_path: Path, out_dir: Path, width: int, height: int, threshold: int, text_size: str):
         self.epub_path = epub_path
@@ -102,17 +108,15 @@ class EPUBSmartSplitter:
         idx = start_idx
 
         while current_top < total_height:
-            remaining_height = total_height - current_top  # Fixed: Calculate remaining height
+            remaining_height = total_height - current_top
             viewport_height = self.find_clean_break(
                 page, scroller, current_top, remaining_height
             )
 
-            # Set final viewport size and position
             page.set_viewport_size({"width": self.width, "height": viewport_height})
             scroller.evaluate("(el, top) => el.scrollTop = top", current_top)
             page.wait_for_timeout(100)
 
-            # Capture and save
             screenshot = Image.open(BytesIO(page.screenshot())).convert("L")
             bw_image = screenshot.point(lambda p: 255 if p > self.threshold else 0, mode="1")
             
@@ -153,11 +157,10 @@ def main():
     )
     parser.add_argument("epub", type=Path, help="Input EPUB file")
     parser.add_argument("outdir", type=Path, help="Output directory")
-    parser.add_argument("--width", type=int, default=758, help="Viewport width")
-    parser.add_argument("--height", type=int, default=940, help="Base viewport height")
-    parser.add_argument("--threshold", type=int, default=220, 
-                      help="White threshold (0-255)")
-    parser.add_argument("--text-size", type=str, default="16px",
+    parser.add_argument("--width", type=int, default=DEFAULT_WIDTH, help="Viewport width")
+    parser.add_argument("--height", type=int, default=DEFAULT_HEIGHT, help="Base viewport height")
+    parser.add_argument("--threshold", type=int, default=220, help="White threshold (0-255)")
+    parser.add_argument("--text-size", type=str, default=DEFAULT_TEXT_SIZE,
                       help="Font size to enforce (e.g., '12px', '1.2em')")
     args = parser.parse_args()
 
