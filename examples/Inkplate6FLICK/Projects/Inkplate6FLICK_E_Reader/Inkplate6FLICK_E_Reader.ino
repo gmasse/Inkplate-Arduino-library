@@ -23,9 +23,9 @@
         it takes any css compatible size value for example: "14px", "1.5em"... Or you can open the script and directly
         change the DEFAULT_TEXT_SIZE variable. 
 
-    A concrete example for Inkplate 6FLICK with the designed dimensions:
-    python .\epub_screenshooter.py "C:\Users\SOLDERED-4\Downloads\pg2000.epub" \
-    "D:\books\Don-Quiote\" --width 758 --height 930 --text-size "14px"
+    A concrete example for Inkplate 6FLICK with the designed dimensions, with a terminal oppened inside epubToImg folder:
+    python .\epubToImg.py "C:\Users\SOLDERED-4\Downloads\pg2000.epub" \
+    "D:\books\Don-Quioxte\" --width 758 --height 930 --text-size "14px"
 
     6 August 2025 by Soldered
 */
