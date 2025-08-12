@@ -10,6 +10,7 @@
     Required components: Inkplate 6FLICK, SD card, USB-C cable.
 
     **HOW TO USE THE PYTHON SCRIPT FOR PREPROCESSING**
+    Open terminal inside script folder and install dependencies using: pip install -r requirements.txt
     In this example, a Python script named "epubToImg.py" is provided.
     It can be called from the command line with the following arguments:
       [path to epub file] [destination path + book name] --width [number] --height [number] --text-size [size]
