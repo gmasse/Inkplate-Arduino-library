@@ -5,9 +5,9 @@
   Don't have "e-radionica Inkplate10" or "Soldered Inkplate10" option? Follow our tutorial and add it:
   https://soldered.com/learn/add-inkplate-6-board-definition-to-arduino-ide/
 
-  This sketch is intended to help calibrate the VCOM display voltage.
-  It should not be run frequently, as doing so may damage internal components.
-  Use with caution.
+  WARNING! - VCOM voltage is written in EEPROM, which means it can be set a limited number of 
+  times, so don't run this sketch repeteadly! VCOM should be set once and then left as is.
+  Use with caution!
 
   Want to learn more about Inkplate? Visit https://soldered.com/documentation/inkplate/
   Looking to get support? Write on our forums: https://forum.soldered.com/
@@ -28,15 +28,14 @@ Inkplate display(INKPLATE_3BIT); // Create an object on Inkplate library and als
 
 
 double currentVCOM; //Stores the current VCOM value stored on EEPROM
-const int EEPROMAddress=0;
+const int EEPROMAddress=0; //Should leave the address as it is for correct EEPROM reading later
 double vcomVoltage;
 
 double readPanelVCOM();
 double getVCOMFromSerial(double *_vcom);
 uint8_t writeVCOMToEEPROM(double v);
 void displayTestImage();
-template<typename T>
-void writeReg(uint8_t reg, T data);
+void writeReg(uint8_t reg, float data);
 uint8_t readReg(uint8_t reg);
 
 void setup() {
@@ -44,8 +43,8 @@ void setup() {
   EEPROM.begin(512);        //Initialize EEPROM
   Wire.begin();             //Initialize I2C buss
   display.begin();          //Initialize the Inkplate 
-  display.einkOn();
-  Serial.println("Enter VCOM value, it must be [-5, 0]");
+  Serial.println("The optimal VCOM Voltage for your Inkplate's panel can sometimes be found written on the flat cable connector");
+  Serial.println("Write VCOM voltage from epaper panel. \r\nDon't forget negative (-) sign!\r\nUse dot as the decimal point.\r\nFor example -1.23\n");
   displayTestImage();
 }
 
@@ -135,8 +134,7 @@ uint8_t writeVCOMToEEPROM(double v){
   Serial.println("VCOM EEPROM PROGRAMMING OK");
   return 1;
 }
-template<typename T>
-void writeReg(uint8_t reg, T data){
+void writeReg(uint8_t reg, float data){
   Wire.beginTransmission(0x48);
   Wire.write(reg);
   Wire.write((uint8_t)data);
