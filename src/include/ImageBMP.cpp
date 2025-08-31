@@ -37,6 +37,7 @@ bool Image::legalBmp(bitmapHeader *bmpHeader)
     // don't set image depth
 }
 
+#ifndef ARDUINO_INKPLATE_DISABLE_SD
 /**
  * @brief       readBmpHeaderSd function saves BMP file header when file is on
  * sd card
@@ -74,6 +75,7 @@ void Image::readBmpHeaderSd(SdFile *_f, bitmapHeader *_h)
         readBmpHeader(header, _h);
     }
 }
+#endif
 
 /**
  * @brief       readBmpHeader function saves BMP file header
@@ -126,6 +128,7 @@ void Image::readBmpHeader(uint8_t *buf, bitmapHeader *_h)
     }
 };
 
+#ifndef ARDUINO_INKPLATE_DISABLE_SD
 /**
  * @brief       drawBitmapFromSd function draws bitmap image from sd file
  *
@@ -190,6 +193,7 @@ bool Image::drawBitmapFromSd(SdFile *p, int x, int y, bool dither, bool invert)
     }
     return 1;
 }
+#endif
 
 /**
  * @brief       drawBitmapFromWeb function draws bitmap image from web
@@ -539,6 +543,7 @@ bool Image::drawBmpFromWebAtPosition(const char *url, const Position &position, 
     return ret;
 }
 
+#ifndef ARDUINO_INKPLATE_DISABLE_SD
 /**
  * @brief       drawBmpFromSdAtPosition function draws bitmap image from sd card
  * at screen position
@@ -587,3 +592,4 @@ bool Image::drawBmpFromSdAtPosition(const char *fileName, const Position &positi
 
     return 1;
 }
+#endif

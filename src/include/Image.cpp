@@ -87,6 +87,7 @@ bool Image::drawImage(const char *path, int x, int y, bool dither, bool invert)
         if (strstr(_fileExtension, "png") != NULL)
             return drawPngFromWeb(path, x, y, dither, invert);
     }
+#ifndef ARDUINO_INKPLATE_DISABLE_SD
     else
     {
         if (strstr(_fileExtension, "bmp") != NULL || strstr(_fileExtension, "dib") != NULL)
@@ -96,6 +97,7 @@ bool Image::drawImage(const char *path, int x, int y, bool dither, bool invert)
         if (strstr(_fileExtension, "png") != NULL)
             return drawPngFromSd(path, x, y, dither, invert);
     }
+#endif
     return 0;
 };
 
@@ -202,6 +204,7 @@ bool Image::drawImage(const char *path, const Format &format, const int x, const
         if (format == PNG)
             return drawPngFromWeb(path, x, y, dither, invert);
     }
+#ifndef ARDUINO_INKPLATE_DISABLE_SD
     else
     {
         if (format == BMP)
@@ -211,6 +214,7 @@ bool Image::drawImage(const char *path, const Format &format, const int x, const
         if (format == PNG)
             return drawPngFromSd(path, x, y, dither, invert);
     }
+#endif
     return 0;
 }
 
@@ -244,6 +248,7 @@ bool Image::drawImage(const char *path, const Format &format, const Position &po
             return drawBmpFromWebAtPosition(path, position, dither, invert);
         return false;
     }
+#ifndef ARDUINO_INKPLATE_DISABLE_SD
     else
     {
         if (format == JPG)
@@ -254,6 +259,7 @@ bool Image::drawImage(const char *path, const Format &format, const Position &po
             return drawBmpFromSdAtPosition(path, position, dither, invert);
         return false;
     }
+#endif
     return false;
 }
 
