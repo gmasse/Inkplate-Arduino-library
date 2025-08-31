@@ -25,7 +25,9 @@
 #include "SPI.h"
 #include "include/Graphics.h"
 #include "include/System.h"
+#ifndef ARDUINO_INKPLATE_DISABLE_SD
 #include "libs/SdFat/SdFat.h"
+#endif
 
 #ifdef ARDUINO_INKPLATE4TEMPERA
 #include "libs/APDS9960/src/APDS9960-SOLDERED.h"
@@ -37,7 +39,9 @@
 #include "include/defines.h"
 
 extern SPIClass spi2;
+#ifndef ARDUINO_INKPLATE_DISABLE_SD
 extern SdFat sd;
+#endif
 
 #if defined(ARDUINO_INKPLATE10) || defined(ARDUINO_INKPLATE10V2)
 struct waveformData

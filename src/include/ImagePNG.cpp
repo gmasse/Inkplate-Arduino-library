@@ -105,6 +105,7 @@ void pngle_on_draw(pngle_t *pngle, uint32_t x, uint32_t y, uint32_t w, uint32_t 
     }
 }
 
+#ifndef ARDUINO_INKPLATE_DISABLE_SD
 /**
  * @brief       drawPngFromSd function draws png image from sd file
  *
@@ -188,6 +189,7 @@ bool Image::drawPngFromSd(SdFile *p, int x, int y, bool dither, bool invert)
     pngle_destroy(pngle);
     return ret;
 }
+#endif
 
 /**
  * @brief       drawPngFromWeb function draws png image from web
@@ -344,6 +346,7 @@ bool Image::drawPngFromWebAtPosition(const char *url, const Position &position, 
     return ret;
 }
 
+#ifndef ARDUINO_INKPLATE_DISABLE_SD
 /**
  * @brief       drawPngFromSdAtPosition function draws png image from sd card at
  * screen position
@@ -410,3 +413,4 @@ bool Image::drawPngFromSdAtPosition(const char *fileName, const Position &positi
 
     return ret;
 }
+#endif

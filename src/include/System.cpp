@@ -20,7 +20,9 @@
 #include "Wire.h"
 
 SPIClass spi2(HSPI);
+#ifndef ARDUINO_INKPLATE_DISABLE_SD
 SdFat sd(&spi2);
+#endif
 
 /**
  * @brief       setPanelState sets panel state (on/off)
@@ -143,6 +145,7 @@ double System::readBattery()
     return (double(adc) * 2.0 / 1000);
 }
 
+#ifndef ARDUINO_INKPLATE_DISABLE_SD
 /**
  * @brief       sdCardInit initializes sd card trough SPI
  *
@@ -193,6 +196,7 @@ SdFat System::getSdFat()
 {
     return sd;
 }
+#endif
 
 /**
  * @brief       getSPIptr gets SPI class object pointer
@@ -204,6 +208,7 @@ SPIClass *System::getSPIptr()
     return &spi2;
 }
 
+#ifndef ARDUINO_INKPLATE_DISABLE_SD
 /**
  * @brief       setSdCardOk sets sd card OK status
  *
@@ -224,6 +229,7 @@ int16_t System::getSdCardOk()
 {
     return _sdCardOk;
 }
+#endif
 
 /**
  * @brief                   Method to set time
