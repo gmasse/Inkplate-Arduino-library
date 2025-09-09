@@ -1,7 +1,7 @@
 /*
     In order to convert your images into a format compatible with Inkplate
     use the Soldered Image Converter available at:
-    https://github.com/SolderedElectronics/Soldered-Image-Converter/releases
+    http://soldered.com/image-converter
 */
 // Array that holds data for bitmap image of 800x160 pixels. You can convert your own image using Inkplate Image Converter.
 const uint8_t logo[] PROGMEM = {

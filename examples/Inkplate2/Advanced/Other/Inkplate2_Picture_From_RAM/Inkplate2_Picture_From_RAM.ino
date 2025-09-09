@@ -11,7 +11,7 @@
 
    In order to convert your images into a format compatible with Inkplate
    use the Soldered Image Converter available at:
-   https://github.com/SolderedElectronics/Soldered-Image-Converter/releases
+   http://soldered.com/image-converter
 
    Want to learn more about Inkplate? Visit www.inkplate.io
    Looking to get support? Write on our forums: https://forum.soldered.com/
@@ -31,7 +31,7 @@
                       /* 
                         In order to convert your images into a format compatible with Inkplate
                         use the Soldered Image Converter available at:
-                        https://github.com/SolderedElectronics/Soldered-Image-Converter/releases
+                        http://soldered.com/image-converter
                       */
 
 

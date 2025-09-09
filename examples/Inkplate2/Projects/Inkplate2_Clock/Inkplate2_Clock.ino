@@ -45,7 +45,7 @@ char pass[] = "";
 #define DELAY_WIFI_RETRY_SECONDS 10
 //----------------------------------
 
-// Bitmaps for 7 segment display. Converted using Inkplate Image Converter https://inkplate.io/home/image-converter/
+// Bitmaps for 7 segment display. Converted using Inkplate Image Converter http://soldered.com/image-converter
 #include "includes/eight.h"
 #include "includes/five.h"
 #include "includes/four.h"

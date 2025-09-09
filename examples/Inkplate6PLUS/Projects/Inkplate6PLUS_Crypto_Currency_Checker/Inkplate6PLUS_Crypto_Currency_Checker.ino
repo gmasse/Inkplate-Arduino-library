@@ -6,7 +6,7 @@
 /*
     In order to convert your images into a format compatible with Inkplate
     use the Soldered Image Converter available at:
-    https://github.com/SolderedElectronics/Soldered-Image-Converter/releases
+    http://soldered.com/image-converter
  */
 #include "Crypto_UI.h"
 #include "Icons/bnc.h"

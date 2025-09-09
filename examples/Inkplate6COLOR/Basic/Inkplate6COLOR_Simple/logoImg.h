@@ -1,7 +1,7 @@
 /*
     In order to convert your images into a format compatible with Inkplate
     use the Soldered Image Converter available at:
-    https://github.com/SolderedElectronics/Soldered-Image-Converter/releases
+    http://soldered.com/image-converter
 */
 const uint8_t logo[] PROGMEM = {
 0x0,0x0,0x0,0x0,0x20,0x0,0x0,0x0,0x0,
