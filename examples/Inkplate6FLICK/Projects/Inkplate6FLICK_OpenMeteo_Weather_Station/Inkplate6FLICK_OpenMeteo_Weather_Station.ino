@@ -3,7 +3,7 @@
   Compatible with Soldered Inkplate 6 Flick
 
   Getting Started:
-  For setup and documentation, visit: https://inkplate.readthedocs.io/en/latest/
+  For setup and documentation, visit: https://soldered.com/documentation/inkplate/projects/open-meteo-weather-station
 
   Overview:
   This example demonstrates how to fetch and display weather data from the OpenMeteo API

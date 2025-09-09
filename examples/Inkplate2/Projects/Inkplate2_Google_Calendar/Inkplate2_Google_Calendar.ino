@@ -2,7 +2,7 @@
 Inkplate2_Google_Calendar for Soldered Inkplate 2
 
 Getting Started:
-For setup and documentation, visit: https://inkplate.readthedocs.io/en/latest/
+For setup and documentation, visit: https://soldered.com/documentation/inkplate/projects/GoogleCalendar
 
 Before You Start:
 
@@ -13,7 +13,10 @@ Before You Start:
   - Get Google Calendar public calendar ID and API key:
       1. Calendar ID: Go to calendar.google.com > Settings > Select your calendar > "Integrate calendar" > Copy "Calendar ID" (e.g. random@group.calendar.google.com).
       2. API Key: Go to console.cloud.google.com > Select/create a project > "APIs & Services" > "Credentials" > "Create credentials" > API key.
-      Make sure your calendar is public under "Access permissions" in calendar settings.
+
+      For this to work:
+      - Ensure the "Google Calendar API" is enabled in the "APIs & Services" to avoid getting '403 Forbidden' error.
+      - Make sure your calendar is public under "Access permissions for events" in calendar settings or you will get '404 Not Found' error.
 */
 
 // Next 3 lines are a precaution, you can ignore those, and the example would also work without them
