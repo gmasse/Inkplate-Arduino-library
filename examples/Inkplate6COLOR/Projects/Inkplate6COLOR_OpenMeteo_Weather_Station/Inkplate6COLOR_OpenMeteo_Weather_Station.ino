@@ -1,9 +1,9 @@
 /*
   Inkplate6COLOR OpenMeteo Weather Station Example
-  Compatible with Soldered Inkplate 6 COLOR
+  Compatible with Soldered Inkplate 6 COLOR -> https://soldered.com/documentation/inkplate/projects/open-meteo-weather-station
 
-  Getting Started:
-  For setup and documentation, visit: https://soldered.com/documentation/inkplate/projects/open-meteo-weather-station
+  Getting Started with Inkplate:
+  For setup and documentation, visit: https://soldered.com/documentation/inkplate
 
   Overview:
   This example demonstrates how to fetch and display weather data from the OpenMeteo API

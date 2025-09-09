@@ -1,8 +1,8 @@
 /*
-Inkplate4TEMPERA_Google_Calendar for Soldered Inkplate 4 Tempera
+Inkplate4TEMPERA_Google_Calendar for Soldered Inkplate 4 Tempera -> https://soldered.com/documentation/inkplate/projects/GoogleCalendar
 
-Getting Started:
-For setup and documentation, visit: https://soldered.com/documentation/inkplate/projects/GoogleCalendar
+Getting Started with Inkplate:
+For setup and documentation, visit: https://soldered.com/documentation/inkplate
 
 Before You Start:
 

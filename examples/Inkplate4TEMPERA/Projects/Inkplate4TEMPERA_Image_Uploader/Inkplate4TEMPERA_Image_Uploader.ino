@@ -1,9 +1,9 @@
 /*
-  Inkplate10 Image Uploader Example
-  Compatible with Soldered Inkplate 10
+  Inkplate4TEMPERA Image Uploader Example
+  Compatible with Soldered Inkplate 4TEMPERA -> https://soldered.com/documentation/inkplate/projects/image-uploader
 
-  Getting Started:
-  For setup and documentation, visit: https://soldered.com/documentation/inkplate/projects/image-uploader
+  Getting Started with Inkplate:
+  For setup and documentation, visit: https://soldered.com/documentation/inkplate
 
   Overview:
   This example demonstrates how to upload an image to a webapp hosted by Inkplate 4TEMPERA

@@ -1,8 +1,8 @@
 /*
-Inkplate6PLUS_Google_Calendar for Soldered Inkplate 6PLUS
+Inkplate6PLUS_Google_Calendar for Soldered Inkplate 6PLUS -> https://soldered.com/documentation/inkplate/projects/GoogleCalendar
 
-Getting Started:
-For setup and documentation, visit: https://soldered.com/documentation/inkplate/projects/GoogleCalendar
+Getting Started with Inkplate:
+For setup and documentation, visit: https://soldered.com/documentation/inkplate
 
 Before You Start:
 

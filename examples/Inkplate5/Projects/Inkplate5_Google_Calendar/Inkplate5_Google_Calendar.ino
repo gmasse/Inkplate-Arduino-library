@@ -8,6 +8,8 @@
    This project shows you how Inkplate 5 can be used to display
    events in your Google Calendar using their provided API
 
+    Documentation link: https://soldered.com/documentation/inkplate/projects/GoogleCalendar
+
    For this to work you need to change your timezone, wifi credentials and your private calendar url
    which you can find following these steps:
 
