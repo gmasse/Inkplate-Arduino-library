@@ -1,6 +1,6 @@
 /*
   Inkplate4TEMPERA OpenAI Image slideshow
-  Compatible with Soldered Inkplate 4 TEMPERA
+  Compatible with Soldered Inkplate 4 TEMPERA -> https://soldered.com/documentation/inkplate/projects/openai-image-slideshow
 
   For this example you will need only USB cable and Inkplate 4 TEMPERA.
   Select "Soldered Inkplate4TEMPERA" from Tools -> Board menu.

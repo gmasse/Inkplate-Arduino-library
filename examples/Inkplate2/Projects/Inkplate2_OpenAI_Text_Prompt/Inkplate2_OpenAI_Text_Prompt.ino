@@ -1,6 +1,6 @@
 /*
   Inkplate2 OpenAI text prompt generator
-  Compatible with Soldered Inkplate 2
+  Compatible with Soldered Inkplate 2 -> https://soldered.com/documentation/inkplate/projects/OpenAI-text-prompt
 
   For this example you will need only USB cable and Inkplate 2.
   Select "Soldered Inkplate2" from Tools -> Board menu.

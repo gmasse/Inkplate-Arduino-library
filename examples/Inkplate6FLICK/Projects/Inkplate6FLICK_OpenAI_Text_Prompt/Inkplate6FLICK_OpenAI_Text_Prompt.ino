@@ -1,6 +1,6 @@
 /*
   Inkplate6FLICK OpenAI text prompt generator
-  Compatible with Soldered Inkplate 6FLICK
+  Compatible with Soldered Inkplate 6FLICK -> https://soldered.com/documentation/inkplate/projects/OpenAI-text-prompt
 
   For this example you will need only USB cable and Inkplate 6FLICK.
   Select "e-radionica Inkplate6FLICK" or "Soldered Inkplate6FLICK" from Tools -> Board menu.

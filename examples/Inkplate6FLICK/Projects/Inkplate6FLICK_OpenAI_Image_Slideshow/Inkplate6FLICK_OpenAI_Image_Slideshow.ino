@@ -1,6 +1,6 @@
 /*
   Inkplate6FLICK OpenAI Image slideshow
-  Compatible with Soldered Inkplate 6FLICK
+  Compatible with Soldered Inkplate 6FLICK -> https://soldered.com/documentation/inkplate/projects/openai-image-slideshow
 
   For this example you will need only USB cable and Inkplate 6FLICK.
   Select "Soldered Inkplate6FLICK" from Tools -> Board menu.

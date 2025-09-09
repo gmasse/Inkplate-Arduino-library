@@ -1,6 +1,6 @@
 /*
   Inkplate4TEMPERA OpenAI text prompt generator
-  Compatible with Soldered Inkplate 4TEMPERA
+  Compatible with Soldered Inkplate 4TEMPERA -> https://soldered.com/documentation/inkplate/projects/OpenAI-text-prompt
 
   For this example you will need only USB cable and Inkplate 4TEMPERA.
   Select "Soldered Inkplate4TEMPERA" from Tools -> Board menu.

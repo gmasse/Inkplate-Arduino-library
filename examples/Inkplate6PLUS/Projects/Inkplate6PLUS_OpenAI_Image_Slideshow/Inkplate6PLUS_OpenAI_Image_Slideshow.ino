@@ -1,6 +1,6 @@
 /*
   Inkplate6PLUS OpenAI Image slideshow
-  Compatible with Soldered Inkplate 6PLUS
+  Compatible with Soldered Inkplate 6PLUS -> https://soldered.com/documentation/inkplate/projects/openai-image-slideshow
 
   For this example you will need only USB cable and Inkplate 6PLUS.
   Select "Soldered Inkplate6PLUS" from Tools -> Board menu.
