@@ -1,26 +1,71 @@
+/*
+    Inkplate Lan Gallery Example
+    Compatible with Soldered Inkplate 10
+
+    Getting started:
+    For this project you will need: Inkplate 10, microSD card (formatted to FAT32!) 
+    and WiFi connection.
+
+    Step 1: Place the formatted microSD card in onboard slot on Inkplate 10
+    
+    Step 2: Install `AsyncTCP` and `ESPAsyncWebServer` libraries, they are available directly from 
+            Arduino Library Manager.
+
+    Step 3: Modify the ssid, password and IMAGE_CHANGE_INTERVAL variables. SSID and password
+            need to be the same as the network you are trying to connect, and INTERVAL_CHANGE_TIMER
+            changes the duration between image changes (in miliseconds, default is 30000ms or 30s)
+    
+    Step 4: Upload the code as usual
+
+    Step 5: Using another device connected to the same network open a browser and 
+            go to langallery.local
+
+    Step 6: Press the 'Choose File' button and select a picture that you want to upload, and 
+            after that press the 'Upload' button
+            
+    Overview:
+    This example demonstartes how to run a webapp, handle multiple users at once, upload files 
+    to onboard SD card and display uploaded images in random order on the e-ink display. Images 
+    will be automatically resized.
+
+*/
+
+// Ensure corect board is selected
 #if !defined(ARDUINO_INKPLATE10) && !defined(ARDUINO_INKPLATE10V2)
 #error "Select 'Soldered Inkplate10' in the boards menu."
 #endif
 
-#include "Inkplate.h"
+#include "Inkplate.h" //Inkplate library
 
+// Initialize Inkplate (3-bit grayscale mode)
 Inkplate display(INKPLATE_3BIT);
 
+
+// WiFi network credentials
 const char* ssid = "YOUR_SSID";
 const char* password = "YOUR_PASSWORD";
 
-#define IMAGE_CHANGE_INTERVAL 30000UL 
+// Image rotation/change inteerval (milliseconds)
+#define IMAGE_CHANGE_INTERVAL 30000UL
 
-struct Node { char* path; int id; Node* next; };
-Node* head = nullptr;
-int nodeCount = 0;
+// Linked list structure for storing image filepaths
+struct Node { 
+    char* path; 
+    int id; 
+    Node* next; 
+};
 
-SemaphoreHandle_t sdMutex;
-SdFile* currentUploadFile = nullptr;
-volatile bool uploadComplete = false;
+Node* head = nullptr;   // Pointer to the first node in circular list 
+int nodeCount = 0; // Total number of images found
 
+SemaphoreHandle_t sdMutex;  // Mutex for SD card access synchronization
+SdFile* currentUploadFile = nullptr;    // File object for current upload
+volatile bool uploadComplete = false;   //Flag to indicate upload completion
+
+// Forward declaration
 void setupWebServer();
 
+// Add a new image node to the linked list
 void addNode(const char* p, int id) {
   Node* n = (Node*)malloc(sizeof(Node));
   if (!n) return;
@@ -38,10 +83,13 @@ void addNode(const char* p, int id) {
   nodeCount++;
 }
 
+// Build a list of all image files found on the SD card
 bool buildImageList() {
   Serial.println("Building image list...");
   if (!display.sdCardInit()) {
-    Serial.println("SD Card init failed!");
+    display.clearDisplay();
+    display.print("SD Card init failed!");
+    display.display();
     return false;
   }
   SdFile root;
@@ -50,6 +98,7 @@ bool buildImageList() {
     return false;
   }
 
+  // Free any existing list before rebuilding
   if (head) {
     Node* current = head;
     Node* first = head;
@@ -63,6 +112,7 @@ bool buildImageList() {
   }
   nodeCount = 0;
 
+// Iterate through SD card root directory and find image files
   SdFile e;
   while (e.openNext(&root, O_RDONLY)) {
     char name[64];
@@ -80,6 +130,7 @@ bool buildImageList() {
   return nodeCount > 0;
 }
 
+// Pick a random image node from the list
 Node* pickRandomNode() {
   if (!head) return nullptr;
   int id = random(nodeCount);
@@ -88,6 +139,7 @@ Node* pickRandomNode() {
   return t;
 }
 
+//read BMP image dimensions directly from SD card
 static bool readBmpSize_SdFat(const char* path, int &w, int &h) {
   w = h = 0;
   SdFile f;
@@ -107,6 +159,7 @@ static bool readBmpSize_SdFat(const char* path, int &w, int &h) {
   return true;
 }
 
+// Read JPEG image dimensions directly from SD card
 static bool readJpegSize_SdFat(const char* path, int &w, int &h) {
   w = h = 0;
   SdFile f;
@@ -135,6 +188,7 @@ static bool readJpegSize_SdFat(const char* path, int &w, int &h) {
     return true;
   };
 
+  // Parse JPEG markers until SOF segment found
   while (true) {
     uint8_t markerPrefix;
     do {
@@ -176,6 +230,7 @@ static bool readJpegSize_SdFat(const char* path, int &w, int &h) {
   return false;
 }
 
+// Detect image type and get its width and height
 static bool getImageWH_SdFat(const char* path, int &w, int &h) {
   const char *ext = strrchr(path, '.');
   if (ext) {
@@ -189,14 +244,21 @@ static bool getImageWH_SdFat(const char* path, int &w, int &h) {
       if (readJpegSize_SdFat(path, w, h)) return true;
     }
   }
-  w = 800; h = 600;
+  // Fallback default size if detection fails
+  w = 800;
+  h = 600;
   return false;
 }
 
+// Display selected image file on the e-ink screen
 void showImage(const char* path) {
   Serial.printf("Displaying: %s\n", path);
   display.clearDisplay();
-  display.sdCardInit();
+  if(!display.sdCardInit()){
+    display.clearDisplay();
+    display.print("SD Card Init() failed!");
+    display.display();
+  }
 
   int imgW = 0, imgH = 0;
   bool okSize = getImageWH_SdFat(path, imgW, imgH);
@@ -213,13 +275,14 @@ void showImage(const char* path) {
 
   Serial.printf("Draw at x=%d, y=%d (disp=%dx%d)\n", x, y, dispW, dispH);
 
+  // Draw image fron SD card
   if (!display.drawImage(path, x, y, 3)) {
     display.setTextSize(2);
     display.setCursor(100, 300);
     display.println("Image load failed!");
   }
 
-  // Overlay text (white on black background)
+  // Overlay footer text (white on black background)
   const char* overlayText = "Inkplate LAN Gallery on langallery.local";
   display.setTextSize(1);
 
@@ -243,6 +306,7 @@ void showImage(const char* path) {
   display.display();
 }
 
+// Start receiving file data for upload
 void startFileUpload(const char* filename) {
   if (xSemaphoreTake(sdMutex, portMAX_DELAY)) {
     display.sdCardInit();
@@ -257,6 +321,7 @@ void startFileUpload(const char* filename) {
   }
 }
 
+// Write incoming file data chunks to SD card
 void writeFileData(uint8_t* data, size_t len) {
   if (xSemaphoreTake(sdMutex, portMAX_DELAY)) {
     if (currentUploadFile && currentUploadFile->isOpen()) {
@@ -269,6 +334,7 @@ void writeFileData(uint8_t* data, size_t len) {
   }
 }
 
+// Finish file upload and close the file
 void finishFileUpload() {
   if (xSemaphoreTake(sdMutex, portMAX_DELAY)) {
     if (currentUploadFile) {
@@ -288,6 +354,7 @@ void finishFileUpload() {
 void setup() {
   Serial.begin(115200);
   display.begin();
+  display.setTextColor(BLACK);
   randomSeed(analogRead(0));
   sdMutex = xSemaphoreCreateMutex();
 
@@ -297,6 +364,7 @@ void setup() {
   display.println("Connecting Wi-Fi...");
   display.display();
 
+  // Connect to existing WiFi network
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
@@ -304,8 +372,10 @@ void setup() {
   }
   Serial.printf("\nConnected! IP: %s\n", WiFi.localIP().toString().c_str());
 
+  // Start local web server fro uploads
   setupWebServer();
 
+  // Build image list and show a random one at startup
   if (buildImageList()) {
     Node* n = pickRandomNode();
     if (n) showImage(n->path);
@@ -318,7 +388,7 @@ void setup() {
   }
 }
 
-unsigned long lastImageChange = 0;
+unsigned long lastImageChange = 0; // track last displayed image time
 
 void loop() {
   if (uploadComplete) {
@@ -339,6 +409,7 @@ void loop() {
     lastImageChange = millis();
   }
 
+  // Automatically change image after the set interval
   if (millis() - lastImageChange >= IMAGE_CHANGE_INTERVAL) {
     if (xSemaphoreTake(sdMutex, portMAX_DELAY)) {
       if (buildImageList()) {
@@ -350,5 +421,5 @@ void loop() {
     lastImageChange = millis();
   }
 
-  delay(10);
+  delay(10); // small delay for task scheduling
 }
