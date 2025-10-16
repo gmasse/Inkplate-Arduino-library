@@ -1,8 +1,8 @@
 /*
-   Inkplate5V2_Peripheral_Mode sketch for Soldered Inkplate 5 V2.
-   For this example you will need only a USB-C cable and Inkplate 5 V2
-   Select "Soldered Inkplate5 V2" from Tools -> Board menu.
-   Don't have "Soldered Inkplate5 V2" option? Follow our tutorial and add it:
+   Inkplate10_Peripheral_Mode sketch for Soldered Inkplate 10.
+   For this example you will need only a USB-C cable and Inkplate 10
+   Select "Soldered Inkplate10" from Tools -> Board menu.
+   Don't have "Soldered Inkplate10" option? Follow our tutorial and add it:
    https://soldered.com/learn/add-inkplate-6-board-definition-to-arduino-ide/
 
    Using this sketch, you don't have to program and control e-paper using Arduino code.
