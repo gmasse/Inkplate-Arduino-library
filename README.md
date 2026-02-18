@@ -24,11 +24,11 @@ There are many examples in the library that you demonstrate how to use any of th
 
 ### Documentation
 
-Find Inkplate documentation [here](https://inkplate.readthedocs.io/en/latest/arduino.html). 
+Find Inkplate documentation [here](https://soldered.com/documentation/inkplate). 
 
 ### Soldered Image Converter
 
-In order to display an Image on Inkplate, you can use the Soldered Image Converter to convert from .png, .jpg, .bmp to .h files which can be easily added to your project. Download the latest release [here](https://github.com/SolderedElectronics/Soldered-Image-Converter/releases).
+In order to display an Image on Inkplate, you can use the Soldered Image Converter to convert from .png, .jpg, .bmp to .h files which can be easily added to your project. See the latest version [here](http://soldered.com/image-converter).
 
 ### Using Inkplate with another microcontroller - Peripheral mode
 

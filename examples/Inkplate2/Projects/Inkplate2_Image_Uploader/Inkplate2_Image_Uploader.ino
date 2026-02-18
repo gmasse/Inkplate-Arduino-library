@@ -2,8 +2,8 @@
   Inkplate10 Image Uploader Example
   Compatible with Soldered Inkplate 10
 
-  Getting Started:
-  For setup and documentation, visit: https://inkplate.readthedocs.io/en/latest/
+  Getting Started with Inkplate:
+  For setup and documentation, visit: https://soldered.com/documentation/inkplate
 
   Overview:
   This example demonstrates how to upload an image to a webapp hosted by Inkplate 2

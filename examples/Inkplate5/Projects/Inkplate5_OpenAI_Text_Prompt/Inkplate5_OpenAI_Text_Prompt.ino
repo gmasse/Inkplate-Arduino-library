@@ -1,6 +1,6 @@
 /*
   Inkplate5 OpenAI text prompt generator
-  Compatible with Soldered Inkplate 5
+  Compatible with Soldered Inkplate 5 -> https://soldered.com/documentation/inkplate/projects/OpenAI-text-prompt
 
   For this example you will need only USB cable and Inkplate 5.
   Select "Soldered Inkplate5" from Tools -> Board menu.

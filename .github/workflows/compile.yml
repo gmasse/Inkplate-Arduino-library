@@ -69,6 +69,8 @@ jobs:
             - source-path: ./
             - name: ArduinoJson
             - name: Time
+            - name: AsyncTCP
+            - name: ESPAsyncWebServer
             - source-url: https://github.com/SolderedElectronics/Soldered-MFRC522-RFID-Reader-Arduino-Library.git
             - source-url: https://github.com/SolderedElectronics/Soldered-WS2812-Smart-Leds-Arduino-Library.git
             - source-url: https://github.com/SolderedElectronics/Soldered-BME280-BME680-Gas-Sensor-Arduino-Library.git

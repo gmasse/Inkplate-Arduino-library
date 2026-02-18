@@ -1,6 +1,6 @@
 /*
   Inkplate5 OpenAI Image slideshow
-  Compatible with Soldered Inkplate 5
+  Compatible with Soldered Inkplate 5 -> https://soldered.com/documentation/inkplate/projects/openai-image-slideshow
 
   For this example you will need only USB cable and Inkplate 5.
   Select "e-radionica Inkplate5" or "Soldered Inkplate5" from Tools -> Board menu.

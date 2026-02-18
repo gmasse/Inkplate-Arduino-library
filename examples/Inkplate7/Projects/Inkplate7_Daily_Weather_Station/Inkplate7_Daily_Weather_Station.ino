@@ -23,7 +23,7 @@
 
     In order to convert your images into a format compatible with Inkplate
     use the Soldered Image Converter available at:
-    https://github.com/SolderedElectronics/Soldered-Image-Converter/releases
+    http://soldered.com/image-converter
 */
 
 // Next 3 lines are a precaution, you can ignore those, and the example would also work without them

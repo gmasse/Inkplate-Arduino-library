@@ -17,7 +17,7 @@
 
     In order to convert your images into a format compatible with Inkplate
     use the Soldered Image Converter available at:
-    https://github.com/SolderedElectronics/Soldered-Image-Converter/releases
+    http://soldered.com/image-converter
 */
 
 // Next 3 lines are a precaution, you can ignore those, and the example would also work without them
@@ -27,7 +27,7 @@
 
 #include "Inkplate.h"      //Include Inkplate library to the sketch
 #include "driver/rtc_io.h" //ESP32 library used for deep sleep and RTC wake up pins
-#include "picture1.h" //Include .h files of 3 pictures. All three pictures were converted using Inkplate Image Converter (https://solderedelectronics.github.io/Inkplate-image-converter/)
+#include "picture1.h" //Include .h files of 3 pictures. All three pictures were converted using Inkplate Image Converter (http://soldered.com/image-converter)
 #include "picture2.h"
 #include "picture3.h"
 

@@ -9,6 +9,8 @@
 
     Required components: Inkplate 6FLICK, SD card, USB-C cable.
 
+    Link to project documentation: https://soldered.com/documentation/inkplate/projects/e-reader
+
     **HOW TO USE THE PYTHON SCRIPT FOR PREPROCESSING**
     Open terminal inside script folder and install dependencies using: pip install -r requirements.txt
     In this example, a Python script named "epubToImg.py" is provided.
