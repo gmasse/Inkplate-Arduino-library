@@ -25,7 +25,7 @@
 // Floyd Steinberg
 const int _coef = 16;
 const int _kernelX = 1;
-const unsigned char _kernel[3][4] = {
+const unsigned char _kernel[2][3] = {
     {0, 0, 7},
     {3, 5, 1},
 };
@@ -51,6 +51,7 @@ const unsigned char _kernel[3][4] = {
     {0, 1, 0, 0},
 };
 */
+
 
 /*
 // Burkes
