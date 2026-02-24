@@ -20,7 +20,11 @@
 #define __IMAGE_H__
 
 #include "../libs/Adafruit-GFX-Library/Adafruit_GFX.h"
+
+#ifndef ARDUINO_INKPLATE_DISABLE_SD
 #include "../libs/SdFat/SdFat.h"
+#endif
+
 #include "Arduino.h"
 #include "ImageDitherColorKernels.h"
 #include "NetworkClient.h"
@@ -84,22 +88,28 @@ class Image : virtual public NetworkClient, virtual public Adafruit_GFX
 
     bool drawBitmapFromBuffer(uint8_t *buf, int x, int y, bool dither, bool invert);
 
+#ifndef ARDUINO_INKPLATE_DISABLE_SD
     bool drawBitmapFromSd(const char *fileName, int x, int y, bool dither = 0, bool invert = 0);
     bool drawBitmapFromSd(SdFile *p, int x, int y, bool dither = 0, bool invert = 0);
+#endif
 
     bool drawBitmapFromWeb(const char *url, int x, int y, bool dither = 0, bool invert = 0);
     bool drawBitmapFromWeb(WiFiClient *s, int x, int y, int32_t len, bool dither = 0, bool invert = 0);
 
     bool drawJpegFromBuffer(uint8_t *buf, int32_t len, int x, int y, bool dither, bool invert);
 
+#ifndef ARDUINO_INKPLATE_DISABLE_SD
     bool drawJpegFromSd(const char *fileName, int x, int y, bool dither = 0, bool invert = 0);
     bool drawJpegFromSd(SdFile *p, int x, int y, bool dither = 0, bool invert = 0);
+#endif
 
     bool drawJpegFromWeb(const char *url, int x, int y, bool dither = 0, bool invert = 0);
     bool drawJpegFromWeb(WiFiClient *s, int x, int y, int32_t len, bool dither = 0, bool invert = 0);
 
+#ifndef ARDUINO_INKPLATE_DISABLE_SD
     bool drawPngFromSd(const char *fileName, int x, int y, bool dither = 0, bool invert = 0);
     bool drawPngFromSd(SdFile *p, int x, int y, bool dither = 0, bool invert = 0);
+#endif
 
     bool drawPngFromWeb(const char *url, int x, int y, bool dither = 0, bool invert = 0);
     bool drawPngFromWeb(WiFiClient *s, int x, int y, int32_t len, bool dither = 0, bool invert = 0);
@@ -165,22 +175,25 @@ class Image : virtual public NetworkClient, virtual public Adafruit_GFX
     void ditherSwapBlockJpeg(int x);
 
     void readBmpHeader(uint8_t *buf, bitmapHeader *_h);
+#ifndef ARDUINO_INKPLATE_DISABLE_SD
     void readBmpHeaderSd(SdFile *_f, bitmapHeader *_h);
-
+#endif
     inline void displayBmpLine(int16_t x, int16_t y, bitmapHeader *bmpHeader, bool dither, bool invert);
 
     bool drawJpegFromWebAtPosition(const char *url, const Position &position, const bool dither = 0,
                                    const bool invert = 0);
-    bool drawJpegFromSdAtPosition(const char *fileName, const Position &position, const bool dither = 0,
-                                  const bool invert = 0);
     bool drawPngFromWebAtPosition(const char *url, const Position &position, const bool dither = 0,
+                                  const bool invert = 0);
+    bool drawBmpFromWebAtPosition(const char *url, const Position &position, const bool dither = 0,
+                                  const bool invert = 0);
+#ifndef ARDUINO_INKPLATE_DISABLE_SD
+    bool drawJpegFromSdAtPosition(const char *fileName, const Position &position, const bool dither = 0,
                                   const bool invert = 0);
     bool drawPngFromSdAtPosition(const char *fileName, const Position &position, const bool dither = 0,
                                  const bool invert = 0);
-    bool drawBmpFromWebAtPosition(const char *url, const Position &position, const bool dither = 0,
-                                  const bool invert = 0);
     bool drawBmpFromSdAtPosition(const char *fileName, const Position &position, const bool dither = 0,
                                  const bool invert = 0);
+#endif
 
     // FUTURE COMPATIBILITY FUNCTIONS; DO NOT USE!
 

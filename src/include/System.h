@@ -19,7 +19,10 @@
 #ifndef __SYSTEM_H__
 #define __SYSTEM_H__
 
+#ifndef ARDUINO_INKPLATE_DISABLE_SD
 #include "../libs/SdFat/SdFat.h"
+#endif
+
 #include "Arduino.h"
 #include "SPI.h"
 #include "time.h"
@@ -137,12 +140,14 @@ class System : public Esp,
 
 #ifndef ARDUINO_INKPLATE2
     double readBattery();
+#ifndef ARDUINO_INKPLATE_DISABLE_SD
     void setSdCardOk(int16_t s);
     int16_t getSdCardOk();
     int16_t sdCardInit();
     void sdCardSleep();
 
     SdFat getSdFat();
+#endif
     SPIClass *getSPIptr();
 
     virtual int _getRotation() = 0; // required in Touch
@@ -210,7 +215,9 @@ class System : public Esp,
     /* support */
     uint8_t rtcControl2;
     uint8_t _panelOn = 0;
+#ifndef ARDUINO_INKPLATE_DISABLE_SD
     int16_t _sdCardOk = 0;
+#endif
     /* time variables*/
     uint8_t rtcHour;
     uint8_t rtcMinute;

@@ -1,3 +1,11 @@
+# Inkplate Arduino library fork
+
+## Changes
+- **Make SD card support optional**
+  By defining `ARDUINO_INKPLATE_DISABLE_SD`, the SdFat library is fully excluded at compile time, which avoids conflicts with other filesystem implementations (like LittleFS). Web-based image loading and all other Inkplate features remain fully functional.
+
+---
+
 # Soldered Inkplate Arduino library
 
 [![Compile Sketches](https://github.com/e-radionicacom/Inkplate-Arduino-library/actions/workflows/compile.yml/badge.svg?branch=master)](https://github.com/e-radionicacom/Inkplate-Arduino-library/actions/workflows/compile.yml)

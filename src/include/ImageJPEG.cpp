@@ -23,6 +23,7 @@
 
 extern Image *_imagePtrJpeg;
 
+#ifndef ARDUINO_INKPLATE_DISABLE_SD
 /**
  * @brief       drawJpegFromSd function draws jpeg image from sd file
  *
@@ -101,6 +102,7 @@ bool Image::drawJpegFromSd(SdFile *p, int x, int y, bool dither, bool invert)
 
     return ret;
 }
+#endif
 
 /**
  * @brief       drawJpegFromWeb function draws jpeg image from web
@@ -201,6 +203,7 @@ bool Image::drawJpegFromWebAtPosition(const char *url, const Position &position,
     return ret;
 }
 
+#ifndef ARDUINO_INKPLATE_DISABLE_SD
 /**
  * @brief       drawJpegFromSdAtPosition function draws jpeg image from sd card
  * at screen position
@@ -272,6 +275,7 @@ bool Image::drawJpegFromSdAtPosition(const char *fileName, const Position &posit
     free(buff);
     return ret;
 }
+#endif
 
 /**
  * @brief       drawJpegFromWeb function draws jpeg image from web
