@@ -94,39 +94,39 @@ class Inkplate : public System, public Graphics
 
     bool connectWiFi(const char *ssid, const char *pass, int timeout = WIFI_TIMEOUT, bool printToSerial = false)
     {
-        return NetworkClient::connectWiFi(ssid, pass, timeout, printToSerial);
+        return InkplateNetworkClient::connectWiFi(ssid, pass, timeout, printToSerial);
     };
     bool connectWiFiMulti(int numNetworks, const char **ssids, const char **passwords, int timeout = WIFI_TIMEOUT,
                           bool printToSerial = false)
     {
-        return NetworkClient::connectWiFiMulti(numNetworks, ssids, passwords, timeout, printToSerial);
+        return InkplateNetworkClient::connectWiFiMulti(numNetworks, ssids, passwords, timeout, printToSerial);
     };
     void setFollowRedirects(followRedirects_t follow)
     {
-        NetworkClient::setFollowRedirects(follow);
+        InkplateNetworkClient::setFollowRedirects(follow);
     };
     void disconnect()
     {
-        NetworkClient::disconnect();
+        InkplateNetworkClient::disconnect();
     };
     bool isConnected()
     {
-        return NetworkClient::isConnected();
+        return InkplateNetworkClient::isConnected();
     };
     void applyHttpsCertificate(const char *certificate)
     {
-        return NetworkClient::applyHttpsCertificate(certificate);
+        return InkplateNetworkClient::applyHttpsCertificate(certificate);
     };
     // The default parameters for nptServer here are cast to (char*) to keep the compiler happy
     bool getNTPEpoch(time_t *timeEpoch, int timeZone = 0, char *ntpServer = (char *)"pool.ntp.org",
                      int daylightSavingsOffsetHours = 0)
     {
-        return NetworkClient::getNTPEpoch(timeEpoch, timeZone, ntpServer, daylightSavingsOffsetHours);
+        return InkplateNetworkClient::getNTPEpoch(timeEpoch, timeZone, ntpServer, daylightSavingsOffsetHours);
     }
     bool getNTPDateTime(tm *dateTime, int timeZone = 0, char *ntpServer = (char *)"pool.ntp.org",
                         int daylightSavingsOffsetHours = 0)
     {
-        return NetworkClient::getNTPDateTime(dateTime, timeZone, ntpServer, daylightSavingsOffsetHours);
+        return InkplateNetworkClient::getNTPDateTime(dateTime, timeZone, ntpServer, daylightSavingsOffsetHours);
     }
     int _getRotation()
     {

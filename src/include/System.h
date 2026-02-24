@@ -94,15 +94,13 @@
 #endif
 
 
-#if defined(ARDUINO_INKPLATE10) || defined(ARDUINO_ESP32_DEV) || defined(ARDUINO_INKPLATE6PLUS)
-#include "Mcp.h"
-#endif
-
 #if defined(ARDUINO_INKPLATE10V2) || defined(ARDUINO_INKPLATE6V2) || defined(ARDUINO_INKPLATE6PLUSV2) ||               \
     defined(ARDUINO_INKPLATECOLOR) || defined(ARDUINO_INKPLATECOOL) || defined(ARDUINO_INKPLATE5) ||                   \
     defined(ARDUINO_INKPLATE5V2) || defined(ARDUINO_INKPLATE4) || defined(ARDUINO_INKPLATE7) ||                        \
     defined(ARDUINO_INKPLATE4TEMPERA) || defined(ARDUINO_INKPLATE6FLICK)
 #include "Pcal.h"
+#elif defined(ARDUINO_INKPLATE10) || defined(ARDUINO_ESP32_DEV) || defined(ARDUINO_INKPLATE6PLUS)
+#include "Mcp.h"
 #endif
 
 #include "defines.h"
@@ -125,7 +123,7 @@ class System : public Esp,
                public Buzzer,
 #endif
 
-               virtual public NetworkClient
+               virtual public InkplateNetworkClient
 
 {
   public:

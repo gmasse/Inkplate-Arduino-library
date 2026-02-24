@@ -20,6 +20,7 @@
 #define __DEFINES_H__
 
 #include "Arduino.h"
+#include "soc/gpio_struct.h"
 
 #if (defined(ARDUINO_ESP32_DEV) || defined(ARDUINO_INKPLATE6V2))
 #include "../boards/Inkplate6.h"

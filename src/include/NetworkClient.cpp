@@ -38,7 +38,7 @@
  *
  * @return      True if successful, false if failed
  */
-bool NetworkClient::connectWiFi(const char *ssid, const char *pass, int timeout, bool printToSerial)
+bool InkplateNetworkClient::connectWiFi(const char *ssid, const char *pass, int timeout, bool printToSerial)
 {
     // Init WiFi
     WiFi.mode(WIFI_MODE_STA);
@@ -112,7 +112,7 @@ bool NetworkClient::connectWiFi(const char *ssid, const char *pass, int timeout,
  *
  * @return      True if successful, false if failed
  */
-bool NetworkClient::connectWiFiMulti(int numNetworks, const char **ssids, const char **passwords, int timeout,
+bool InkplateNetworkClient::connectWiFiMulti(int numNetworks, const char **ssids, const char **passwords, int timeout,
                                      bool printToSerial)
 {
     // Create the WiFiMulti object
@@ -173,7 +173,7 @@ bool NetworkClient::connectWiFiMulti(int numNetworks, const char **ssids, const 
 /**
  * @brief       Turns off Inkplate's WiFi mode
  */
-void NetworkClient::disconnect()
+void InkplateNetworkClient::disconnect()
 {
     WiFi.mode(WIFI_OFF);
 }
@@ -183,7 +183,7 @@ void NetworkClient::disconnect()
  *
  * @returns     True if connected, False if not
  */
-bool NetworkClient::isConnected()
+bool InkplateNetworkClient::isConnected()
 {
     return WiFi.status() == WL_CONNECTED;
 }
@@ -208,7 +208,7 @@ bool NetworkClient::isConnected()
  *
  * @return      True if successful, false if failed
  */
-bool NetworkClient::getNTPEpoch(time_t *timeEpoch, int timeZone, char *ntpServer, int daylightSavingsOffsetHours)
+bool InkplateNetworkClient::getNTPEpoch(time_t *timeEpoch, int timeZone, char *ntpServer, int daylightSavingsOffsetHours)
 {
     // If WiFi is not connected, we can't get the epoch
     if (!isConnected())
@@ -260,7 +260,7 @@ bool NetworkClient::getNTPEpoch(time_t *timeEpoch, int timeZone, char *ntpServer
  *
  * @return      True if successful, false if failed
  */
-bool NetworkClient::getNTPDateTime(tm *dateTime, int timeZone, char *ntpServer, int daylightSavingsOffsetHours)
+bool InkplateNetworkClient::getNTPDateTime(tm *dateTime, int timeZone, char *ntpServer, int daylightSavingsOffsetHours)
 {
     // If WiFi is not connected, we can't get the epoch
     if (!isConnected())
@@ -298,7 +298,7 @@ bool NetworkClient::getNTPDateTime(tm *dateTime, int timeZone, char *ntpServer, 
  *
  * @return      Char * string of host name
  */
-char *NetworkClient::getHostFromURL(const char *urlToGetHostFrom)
+char *InkplateNetworkClient::getHostFromURL(const char *urlToGetHostFrom)
 {
     // Check if url is HTTP or HTTPS
     int offsetToGetToBeginningOfHost = 0;
@@ -340,7 +340,7 @@ char *NetworkClient::getHostFromURL(const char *urlToGetHostFrom)
  *
  * @return      Char * string of resource string
  */
-char *NetworkClient::getPathToResourceFromURL(const char *urlToGetPathToResourceFrom)
+char *InkplateNetworkClient::getPathToResourceFromURL(const char *urlToGetPathToResourceFrom)
 {
     // Check if url is HTTP or HTTPS
     int offsetToGetToBeginningOfHost = 0;
@@ -385,7 +385,7 @@ char *NetworkClient::getPathToResourceFromURL(const char *urlToGetPathToResource
  *
  * @return      pointer to buffer that holds downloaded file
  */
-uint8_t *NetworkClient::downloadFileHTTPS(const char *url, int32_t *defaultLen)
+uint8_t *InkplateNetworkClient::downloadFileHTTPS(const char *url, int32_t *defaultLen)
 {
     if (!isConnected())
         return NULL;
@@ -490,7 +490,7 @@ uint8_t *NetworkClient::downloadFileHTTPS(const char *url, int32_t *defaultLen)
  *
  * @return      pointer to buffer that holds downloaded file
  */
-uint8_t *NetworkClient::downloadFile(WiFiClient *s, int32_t len)
+uint8_t *InkplateNetworkClient::downloadFile(WiFiClient *s, int32_t len)
 {
     if (!isConnected())
         return NULL;
@@ -535,7 +535,7 @@ uint8_t *NetworkClient::downloadFile(WiFiClient *s, int32_t len)
  *
  * @return      pointer to buffer that holds downloaded file
  */
-uint8_t *NetworkClient::downloadFile(const char *url, int32_t *defaultLen)
+uint8_t *InkplateNetworkClient::downloadFile(const char *url, int32_t *defaultLen)
 {
     if (!isConnected())
         return NULL;
@@ -610,7 +610,7 @@ uint8_t *NetworkClient::downloadFile(const char *url, int32_t *defaultLen)
  * @returns     None
  *
  */
-void NetworkClient::setFollowRedirects(followRedirects_t f)
+void InkplateNetworkClient::setFollowRedirects(followRedirects_t f)
 {
     this->followRedirects = f;
 }
@@ -623,7 +623,7 @@ void NetworkClient::setFollowRedirects(followRedirects_t f)
  * @returns     None
  *
  */
-void NetworkClient::applyHttpsCertificate(const char *certificate)
+void InkplateNetworkClient::applyHttpsCertificate(const char *certificate)
 {
     this->certificate = strdup(certificate);
 }

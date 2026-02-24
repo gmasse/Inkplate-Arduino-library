@@ -850,7 +850,7 @@ void System::rtcSetInternalCapacitor(bool val)
     Wire.write(RTC_CTRL_1);
     Wire.endTransmission();
 
-    uint8_t reg;
+    uint8_t reg = 0;
     Wire.requestFrom(I2C_ADDR, 1);
 
     if (Wire.available())

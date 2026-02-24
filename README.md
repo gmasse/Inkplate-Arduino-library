@@ -1,6 +1,10 @@
 # Inkplate Arduino library fork
 
 ## Changes
+- **Rename `NetworkClient` to `InkplateNetworkClient`**
+  Avoids naming conflict with Arduino-ESP32's built-in `NetworkClient` class.
+  Also fixes several compilation issues with Clang.
+
 - **Make SD card support optional**
   By defining `ARDUINO_INKPLATE_DISABLE_SD`, the SdFat library is fully excluded at compile time, which avoids conflicts with other filesystem implementations (like LittleFS). Web-based image loading and all other Inkplate features remain fully functional.
 

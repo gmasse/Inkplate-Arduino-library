@@ -48,10 +48,10 @@ struct bitmapHeader
 #define WIFI_TIMEOUT 23
 
 /**
- * @brief       NetworkClient class that holds standard functions for working
+ * @brief       InkplateNetworkClient class that holds standard functions for working
  * with network
  */
-class NetworkClient
+class InkplateNetworkClient
 {
   public:
     bool connectWiFi(const char *ssid, const char *pass, int timeout = WIFI_TIMEOUT, bool printToSerial = false);

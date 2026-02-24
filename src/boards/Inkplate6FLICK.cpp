@@ -424,10 +424,15 @@ void Inkplate::display3b(bool leaveOn)
         {
             for (int j = 0; j < (E_INK_WIDTH / 4); j += 4)
             {
-                _dmaLineBuffer[j + 2] = (GLUT2[k * 256 + (*(--dp))] | GLUT[k * 256 + (*(--dp))]);
-                _dmaLineBuffer[j + 3] = (GLUT2[k * 256 + (*(--dp))] | GLUT[k * 256 + (*(--dp))]);
-                _dmaLineBuffer[j] = (GLUT2[k * 256 + (*(--dp))] | GLUT[k * 256 + (*(--dp))]);
-                _dmaLineBuffer[j + 1] = (GLUT2[k * 256 + (*(--dp))] | GLUT[k * 256 + (*(--dp))]);
+                uint8_t v0, v1;
+                v0 = *(--dp); v1 = *(--dp);
+                _dmaLineBuffer[j + 2] = GLUT2[k * 256 + v0] | GLUT[k * 256 + v1];
+                v0 = *(--dp); v1 = *(--dp);
+                _dmaLineBuffer[j + 3] = GLUT2[k * 256 + v0] | GLUT[k * 256 + v1];
+                v0 = *(--dp); v1 = *(--dp);
+                _dmaLineBuffer[j]     = GLUT2[k * 256 + v0] | GLUT[k * 256 + v1];
+                v0 = *(--dp); v1 = *(--dp);
+                _dmaLineBuffer[j + 1] = GLUT2[k * 256 + v0] | GLUT[k * 256 + v1];
             }
             sendDataI2S(myI2S, _dmaI2SDesc);
             vscan_end();
