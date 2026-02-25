@@ -17,6 +17,12 @@
  ***************************************************/
 
 #include "Esp.h"
+#include "esp_idf_version.h"
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
+#include "esp_private/periph_ctrl.h"
+#else
+#include "driver/periph_ctrl.h"
+#endif
 
 /**
  * @brief       Function Intializes I2S driver of the ESP32
