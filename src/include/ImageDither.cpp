@@ -46,7 +46,7 @@ uint8_t Image::ditherGetPixelBmp(uint32_t px, int i, int j, int w, bool paletted
 
     uint8_t oldPixel = min((uint16_t)0xFF, (uint16_t)((uint16_t)ditherBuffer[0][i] + px));
 
-    uint8_t newPixel = oldPixel & (getDisplayMode() == INKPLATE_1BIT ? B10000000 : B11100000);
+    uint8_t newPixel = oldPixel & (getDisplayMode() == INKPLATE_1BIT ? 0b10000000 : 0b11100000);
     uint8_t quantError = oldPixel - newPixel;
 
     ditherBuffer[1][i + 0] += (quantError * 5) >> 4;
@@ -96,7 +96,7 @@ uint8_t Image::ditherGetPixelJpeg(uint8_t px, int i, int j, int x, int y, int w,
     uint16_t oldPixel = min((uint16_t)0xFF, (uint16_t)((uint16_t)px + (uint16_t)jpegDitherBuffer[j + 1][i + 1] +
                                                        (j ? (uint16_t)0 : (uint16_t)ditherBuffer[0][x + i])));
 
-    uint8_t newPixel = oldPixel & (getDisplayMode() == INKPLATE_1BIT ? B10000000 : B11100000);
+    uint8_t newPixel = oldPixel & (getDisplayMode() == INKPLATE_1BIT ? 0b10000000 : 0b11100000);
     uint8_t quantError = oldPixel - newPixel;
 
     jpegDitherBuffer[j + 1 + 1][i + 0 + 1] += (quantError * 5) >> 4;

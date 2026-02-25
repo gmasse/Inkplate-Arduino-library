@@ -22,16 +22,15 @@
 #include "Arduino.h"
 
 #include "defines.h"
-#include "driver/periph_ctrl.h"
 #include "rom/lldesc.h"
 #include "soc/i2s_reg.h"
 #include "soc/i2s_struct.h"
 #include "soc/rtc.h"
 #include "soc/soc.h"
 
-void IRAM_ATTR I2SInit(volatile i2s_dev_t *_i2sDev, uint8_t _clockDivider = 5);
-void IRAM_ATTR sendDataI2S(volatile i2s_dev_t *_i2sDev, volatile lldesc_s *_dmaDecs);
-void IRAM_ATTR setI2S1pin(uint32_t _pin, uint32_t _function, uint32_t _inv);
+void I2SInit(volatile i2s_dev_t *_i2sDev, uint8_t _clockDivider = 5);
+void sendDataI2S(volatile i2s_dev_t *_i2sDev, volatile lldesc_s *_dmaDecs);
+void setI2S1pin(uint32_t _pin, uint32_t _function, uint32_t _inv);
 
 /**
  * @brief       Esp class

@@ -17,6 +17,12 @@
  ***************************************************/
 
 #include "Esp.h"
+#include "esp_idf_version.h"
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
+#include "esp_private/periph_ctrl.h"
+#else
+#include "driver/periph_ctrl.h"
+#endif
 
 /**
  * @brief       Function Intializes I2S driver of the ESP32
@@ -26,7 +32,7 @@
  *
  * @note        Function must be declared static to fit into Instruction RAM of the ESP32.
  */
-void IRAM_ATTR I2SInit(i2s_dev_t *_i2sDev, uint8_t _clockDivider)
+void IRAM_ATTR I2SInit(volatile i2s_dev_t *_i2sDev, uint8_t _clockDivider)
 {
     // Enable I2S peripheral and reset it.
     periph_module_enable(PERIPH_I2S1_MODULE);
@@ -106,7 +112,7 @@ void IRAM_ATTR I2SInit(i2s_dev_t *_i2sDev, uint8_t _clockDivider)
  * @note        Function must be declared static to fit into Instruction RAM of the ESP32. Also, DMA descriptor must be
  * already configured!
  */
-void IRAM_ATTR sendDataI2S(i2s_dev_t *_i2sDev, volatile lldesc_s *_dmaDecs)
+void IRAM_ATTR sendDataI2S(volatile i2s_dev_t *_i2sDev, volatile lldesc_s *_dmaDecs)
 {
     // Stop any on-going transmission (just in case).
     _i2sDev->out_link.stop = 1;

@@ -110,27 +110,27 @@ int Inkplate::einkOn()
         // Enable all rails
         Wire.beginTransmission(0x48);
         Wire.write(0x01);
-        Wire.write(B00100000);
+        Wire.write(0b00100000);
         Wire.endTransmission();
     }
 #else
     // Enable all rails
     Wire.beginTransmission(0x48);
     Wire.write(0x01);
-    Wire.write(B00100000);
+    Wire.write(0b00100000);
     Wire.endTransmission();
 #endif
 
     // Modify power up sequence.
     Wire.beginTransmission(0x48);
     Wire.write(0x09);
-    Wire.write(B11100100);
+    Wire.write(0b11100100);
     Wire.endTransmission();
 
     // Modify power down sequence  (VEE and VNEG are swapped)
     Wire.beginTransmission(0x48);
     Wire.write(0x0b);
-    Wire.write(B00011011);
+    Wire.write(0b00011011);
     Wire.endTransmission();
 
     pinsAsOutputs();
@@ -199,7 +199,7 @@ void Inkplate::einkOff()
     WAKEUP_CLEAR; // Disable 3V3 Switch for ePaper.
     Wire.beginTransmission(0x48);
     Wire.write(0x01);
-    Wire.write(B00000000);
+    Wire.write(0b00000000);
     Wire.endTransmission();
 #endif
 #endif

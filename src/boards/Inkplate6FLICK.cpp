@@ -106,13 +106,16 @@ bool Inkplate::begin(void)
 
     // Enable ePaper PMIC to set proper power up sequence.
     WAKEUP_SET;
-    delay(1);
+    // ESP-IDF 5.x new I2C driver (i2c-ng) does not guarantee the bus is back to
+    // IDLE before Wire.endTransmission() returns. 10ms ensures the WAKEUP_SET
+    // I2C transaction to 0x20 has fully completed before we address TPS65186.
+    delay(10);
     Wire.beginTransmission(0x48);
     Wire.write(0x09);
-    Wire.write(B00011011); // Power up seq.
-    Wire.write(B00000000); // Power up delay (3mS per rail)
-    Wire.write(B00011011); // Power down seq.
-    Wire.write(B00000000); // Power down delay (6mS per rail)
+    Wire.write(0b00011011); // Power up seq.
+    Wire.write(0b00000000); // Power up delay (3mS per rail)
+    Wire.write(0b00011011); // Power down seq.
+    Wire.write(0b00000000); // Power down delay (6mS per rail)
     Wire.endTransmission();
     delay(1);
     WAKEUP_CLEAR;
@@ -243,13 +246,13 @@ void Inkplate::clean(uint8_t c, uint8_t rep)
     einkOn();
     uint8_t data = 0;
     if (c == 0)
-        data = B10101010;
+        data = 0b10101010;
     else if (c == 1)
-        data = B01010101;
+        data = 0b01010101;
     else if (c == 2)
-        data = B00000000;
+        data = 0b00000000;
     else if (c == 3)
-        data = B11111111;
+        data = 0b11111111;
 
     // Fill up the buffer with the data.
     for (int i = 0; i < (E_INK_WIDTH / 4); i++)
@@ -291,11 +294,6 @@ void Inkplate::display1b(bool leaveOn)
 {
     // Copy everything from partial buffer into main buffer.
     memcpy(DMemoryNew, _partial, E_INK_WIDTH * E_INK_HEIGHT / 8);
-
-    // Helper variables.
-    uint32_t _send;
-    uint8_t data;
-    uint8_t dram;
 
     // Try to power up ePaper power supply (TPS65186).
     // Cancel the screen refresh if power up failed.
@@ -488,8 +486,6 @@ uint32_t Inkplate::partialUpdate(bool _forced, bool leaveOn)
     }
 
     uint32_t _pos = (E_INK_WIDTH * E_INK_HEIGHT / 8) - 1;
-    uint32_t _send;
-    uint8_t data = 0;
     uint8_t diffw, diffb;
     uint32_t n = (E_INK_WIDTH * E_INK_HEIGHT / 4) - 1;
 

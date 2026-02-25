@@ -1,6 +1,12 @@
 # Inkplate Arduino library fork
 
+This fork adapts the Inkplate Arduino library so it can be included as a component in an ESP-IDF project. For a ready-to-use project template and setup instructions, see [Inkplate-Arduino-as-ESP-IDF-component](https://github.com/gmasse/Inkplate-Arduino-as-ESP-IDF-component).
+
 ## Changes
+- **ESP-IDF 5.x compatibility fixes**
+  Increase `WAKEUP_SET` delay from 1ms to 10ms for the TPS65186 PMIC on all affected boards (Inkplate5, Inkplate5V2, Inkplate6, Inkplate6plus, Inkplate6FLICK, Inkplate10, Inkplate4TEMPERA). The ESP-IDF 5.x I2C driver (`i2c-ng`) does not guarantee the bus returns to IDLE before `Wire.endTransmission()` returns, causing the TPS65186 to be addressed before the prior I2C transaction has fully completed.
+  Also replaces deprecated `B` binary literals with standard `0b` prefix, version-guards the deprecated `driver/periph_ctrl.h` include, and resolves various compiler warnings.
+
 - **Rename `NetworkClient` to `InkplateNetworkClient`**
   Avoids naming conflict with Arduino-ESP32's built-in `NetworkClient` class.
   Also fixes several compilation issues with Clang.
