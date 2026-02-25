@@ -247,10 +247,6 @@ void Inkplate::display1b(bool leaveOn)
 {
     memcpy(DMemoryNew, _partial, E_INK_WIDTH * E_INK_HEIGHT / 8);
 
-    uint32_t _send;
-    uint8_t data;
-    uint8_t dram;
-
     if (!einkOn())
         return;
 
@@ -438,8 +434,6 @@ uint32_t Inkplate::partialUpdate(bool _forced, bool leaveOn)
     }
 
     uint16_t _pos = (E_INK_WIDTH * E_INK_HEIGHT / 8) - 1;
-    uint32_t _send;
-    uint8_t data = 0;
     uint8_t diffw, diffb;
     uint32_t n = (E_INK_WIDTH * E_INK_HEIGHT / 4) - 1;
 

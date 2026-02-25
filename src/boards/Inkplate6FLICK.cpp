@@ -295,11 +295,6 @@ void Inkplate::display1b(bool leaveOn)
     // Copy everything from partial buffer into main buffer.
     memcpy(DMemoryNew, _partial, E_INK_WIDTH * E_INK_HEIGHT / 8);
 
-    // Helper variables.
-    uint32_t _send;
-    uint8_t data;
-    uint8_t dram;
-
     // Try to power up ePaper power supply (TPS65186).
     // Cancel the screen refresh if power up failed.
     if (!einkOn())
@@ -491,8 +486,6 @@ uint32_t Inkplate::partialUpdate(bool _forced, bool leaveOn)
     }
 
     uint32_t _pos = (E_INK_WIDTH * E_INK_HEIGHT / 8) - 1;
-    uint32_t _send;
-    uint8_t data = 0;
     uint8_t diffw, diffb;
     uint32_t n = (E_INK_WIDTH * E_INK_HEIGHT / 4) - 1;
 

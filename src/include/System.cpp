@@ -64,7 +64,7 @@ int8_t System::readTemperature()
     }
     Wire.beginTransmission(0x48);
     Wire.write(0x0D);
-    Wire.write(B10000000);
+    Wire.write(0b10000000);
     Wire.endTransmission();
     delay(5);
 
