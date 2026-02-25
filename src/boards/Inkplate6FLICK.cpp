@@ -106,7 +106,10 @@ bool Inkplate::begin(void)
 
     // Enable ePaper PMIC to set proper power up sequence.
     WAKEUP_SET;
-    delay(1);
+    // ESP-IDF 5.x new I2C driver (i2c-ng) does not guarantee the bus is back to
+    // IDLE before Wire.endTransmission() returns. 10ms ensures the WAKEUP_SET
+    // I2C transaction to 0x20 has fully completed before we address TPS65186.
+    delay(10);
     Wire.beginTransmission(0x48);
     Wire.write(0x09);
     Wire.write(B00011011); // Power up seq.
