@@ -92,8 +92,8 @@ bool Inkplate::begin(void)
 
 #ifndef ARDUINO_INKPLATECOLOR
     for (uint32_t i = 0; i < 256; ++i)
-        pinLUT[i] = ((i & B00000011) << 4) | (((i & B00001100) >> 2) << 18) | (((i & B00010000) >> 4) << 23) |
-                    (((i & B11100000) >> 5) << 25);
+        pinLUT[i] = ((i & 0b00000011) << 4) | (((i & 0b00001100) >> 2) << 18) | (((i & 0b00010000) >> 4) << 23) |
+                    (((i & 0b11100000) >> 5) << 25);
 #endif
 
 #ifdef ARDUINO_ESP32_DEV
@@ -121,10 +121,10 @@ bool Inkplate::begin(void)
     delay(10);
     Wire.beginTransmission(0x48);
     Wire.write(0x09);
-    Wire.write(B00011011); // Power up seq.
-    Wire.write(B00000000); // Power up delay (3mS per rail)
-    Wire.write(B00011011); // Power down seq.
-    Wire.write(B00000000); // Power down delay (6mS per rail)
+    Wire.write(0b00011011); // Power up seq.
+    Wire.write(0b00000000); // Power up delay (3mS per rail)
+    Wire.write(0b00011011); // Power down seq.
+    Wire.write(0b00000000); // Power down delay (6mS per rail)
     Wire.endTransmission();
     delay(1);
 
@@ -133,7 +133,7 @@ bool Inkplate::begin(void)
         // Enable all rails
         Wire.beginTransmission(0x48);
         Wire.write(0x01);
-        Wire.write(B00111111);
+        Wire.write(0b00111111);
         Wire.endTransmission();
     }
     else
@@ -223,11 +223,11 @@ bool Inkplate::begin(void)
         for (uint32_t i = 0; i < 256; ++i)
         {
             uint8_t z = (waveform3Bit[i & 0x07][j] << 2) | (waveform3Bit[(i >> 4) & 0x07][j]);
-            GLUT[j * 256 + i] = ((z & B00000011) << 4) | (((z & B00001100) >> 2) << 18) |
-                                (((z & B00010000) >> 4) << 23) | (((z & B11100000) >> 5) << 25);
+            GLUT[j * 256 + i] = ((z & 0b00000011) << 4) | (((z & 0b00001100) >> 2) << 18) |
+                                (((z & 0b00010000) >> 4) << 23) | (((z & 0b11100000) >> 5) << 25);
             z = ((waveform3Bit[i & 0x07][j] << 2) | (waveform3Bit[(i >> 4) & 0x07][j])) << 4;
-            GLUT2[j * 256 + i] = ((z & B00000011) << 4) | (((z & B00001100) >> 2) << 18) |
-                                 (((z & B00010000) >> 4) << 23) | (((z & B11100000) >> 5) << 25);
+            GLUT2[j * 256 + i] = ((z & 0b00000011) << 4) | (((z & 0b00001100) >> 2) << 18) |
+                                 (((z & 0b00010000) >> 4) << 23) | (((z & 0b11100000) >> 5) << 25);
         }
     }
 
@@ -256,27 +256,27 @@ void Inkplate::clean(uint8_t c, uint8_t rep)
     uint8_t data;
     if (c == 0)
     {
-        data = B10101010; // White
+        data = 0b10101010; // White
     }
     else if (c == 1)
     {
-        data = B01010101; // Black
+        data = 0b01010101; // Black
     }
     else if (c == 2)
     {
-        data = B00000000; // Discharge
+        data = 0b00000000; // Discharge
     }
     else if (c == 3)
     {
-        data = B11111111; // Skip
+        data = 0b11111111; // Skip
     }
     else
     {
         data = 0;
     }
 
-    uint32_t _send = ((data & B00000011) << 4) | (((data & B00001100) >> 2) << 18) | (((data & B00010000) >> 4) << 23) |
-                     (((data & B11100000) >> 5) << 25);
+    uint32_t _send = ((data & 0b00000011) << 4) | (((data & 0b00001100) >> 2) << 18) | (((data & 0b00010000) >> 4) << 23) |
+                     (((data & 0b11100000) >> 5) << 25);
 
     for (int k = 0; k < rep; k++)
     {

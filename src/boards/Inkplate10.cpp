@@ -60,8 +60,8 @@ bool Inkplate::begin()
 
 #if !defined(ARDUINO_INKPLATECOLOR) || !defined(ARDUINO_INKPLATE2)
     for (uint32_t i = 0; i < 256; ++i)
-        pinLUT[i] = ((i & B00000011) << 4) | (((i & B00001100) >> 2) << 18) | (((i & B00010000) >> 4) << 23) |
-                    (((i & B11100000) >> 5) << 25);
+        pinLUT[i] = ((i & 0b00000011) << 4) | (((i & 0b00001100) >> 2) << 18) | (((i & 0b00010000) >> 4) << 23) |
+                    (((i & 0b11100000) >> 5) << 25);
 #endif
 
 #ifdef ARDUINO_ESP32_DEV
@@ -89,10 +89,10 @@ bool Inkplate::begin()
     delay(10);
     Wire.beginTransmission(0x48);
     Wire.write(0x09);
-    Wire.write(B00011011); // Power up seq.
-    Wire.write(B00000000); // Power up delay (3mS per rail)
-    Wire.write(B00011011); // Power down seq.
-    Wire.write(B00000000); // Power down delay (6mS per rail)
+    Wire.write(0b00011011); // Power up seq.
+    Wire.write(0b00000000); // Power up delay (3mS per rail)
+    Wire.write(0b00011011); // Power down seq.
+    Wire.write(0b00000000); // Power down delay (6mS per rail)
     Wire.endTransmission();
     delay(1);
     WAKEUP_CLEAR;
@@ -561,13 +561,13 @@ void Inkplate::clean(uint8_t c, uint8_t rep)
     einkOn();
     uint8_t data = 0;
     if (c == 0)
-        data = B10101010;
+        data = 0b10101010;
     else if (c == 1)
-        data = B01010101;
+        data = 0b01010101;
     else if (c == 2)
-        data = B00000000;
+        data = 0b00000000;
     else if (c == 3)
-        data = B11111111;
+        data = 0b11111111;
 
     uint32_t _send = pinLUT[data];
     for (int k = 0; k < rep; ++k)
@@ -616,11 +616,11 @@ void Inkplate::calculateLUTs()
         for (uint32_t i = 0; i < 256; ++i)
         {
             uint8_t z = (waveform3Bit[i & 0x07][j] << 2) | (waveform3Bit[(i >> 4) & 0x07][j]);
-            GLUT[j * 256 + i] = ((z & B00000011) << 4) | (((z & B00001100) >> 2) << 18) |
-                                (((z & B00010000) >> 4) << 23) | (((z & B11100000) >> 5) << 25);
+            GLUT[j * 256 + i] = ((z & 0b00000011) << 4) | (((z & 0b00001100) >> 2) << 18) |
+                                (((z & 0b00010000) >> 4) << 23) | (((z & 0b11100000) >> 5) << 25);
             z = ((waveform3Bit[i & 0x07][j] << 2) | (waveform3Bit[(i >> 4) & 0x07][j])) << 4;
-            GLUT2[j * 256 + i] = ((z & B00000011) << 4) | (((z & B00001100) >> 2) << 18) |
-                                 (((z & B00010000) >> 4) << 23) | (((z & B11100000) >> 5) << 25);
+            GLUT2[j * 256 + i] = ((z & 0b00000011) << 4) | (((z & 0b00001100) >> 2) << 18) |
+                                 (((z & 0b00010000) >> 4) << 23) | (((z & 0b11100000) >> 5) << 25);
         }
     }
 }
